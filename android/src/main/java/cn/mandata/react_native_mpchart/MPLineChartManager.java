@@ -62,10 +62,10 @@ public class MPLineChartManager extends MPBarLineChartManager {
             ReadableMap map=ra.getMap(i);
             ReadableArray data=map.getArray("data");
             String label=map.getString("label");
-            float[] vals=new float[data.size()];
+      //      float[] vals=new float[data.size()];
             ArrayList<Entry> entries=new ArrayList<Entry>();
             for (int j=0;j<data.size();j++){
-                vals[j]=(float)data.getDouble(j);
+      //          vals[j]=(float)data.getDouble(j);
                 Entry be=new Entry((float)data.getDouble(j),j);
                 entries.add(be);
             }
@@ -79,6 +79,11 @@ public class MPLineChartManager extends MPBarLineChartManager {
                 int[] colors=new int[]{Color.parseColor(config.getString("color"))};
                 dataSet.setColors(colors);
             }
+            if(config.hasKey("circleColor")) {
+                int color= (Color.parseColor(config.getString("circleColor")));
+                dataSet.setCircleColor(color);
+            }
+            if(config.hasKey("drawValues")) dataSet.setDrawValues(config.getBoolean("drawValues"));
             chartData.addDataSet(dataSet);
         }
         chart.setBackgroundColor(Color.WHITE);
